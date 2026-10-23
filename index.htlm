@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gab OS</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(135deg,#0d47a1,#2196f3);
+    height:100vh;
+    overflow:hidden;
+}
+
+.topbar{
+    height:32px;
+    background:#1f1f1f;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 10px;
+}
+
+.desktop{
+    padding:20px;
+}
+
+.icon{
+    color:white;
+    text-align:center;
+    width:80px;
+    margin-bottom:20px;
+    cursor:pointer;
+    user-select:none;
+}
+
+.icon span{
+    font-size:40px;
+    display:block;
+}
+
+.window{
+    position:absolute;
+    width:600px;
+    height:350px;
+    background:white;
+    border-radius:5px;
+    overflow:hidden;
+    box-shadow:0 0 15px black;
+    display:none;
+}
+
+.titlebar{
+    background:#444;
+    color:white;
+    padding:8px;
+    font-weight:bold;
+}
+
+.content{
+    padding:15px;
+    height:100%;
+}
+
+.terminal{
+    background:#111;
+    color:#00ff00;
+    height:100%;
+    padding:10px;
+    font-family:monospace;
+}
+
+.taskbar{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:40px;
+    background:#222;
+    display:flex;
+    align-items:center;
+}
+
+.start{
+    margin-left:5px;
+    background:#0066ff;
+    color:white;
+    border:none;
+    padding:8px 15px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.menu{
+    position:absolute;
+    bottom:40px;
+    left:5px;
+    width:220px;
+    background:white;
+    display:none;
+    border-radius:5px;
+    overflow:hidden;
+    box-shadow:0 0 10px black;
+}
+
+.menu div{
+    padding:10px;
+    cursor:pointer;
+}
+
+.menu div:hover{
+    background:#e0e0e0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <div>💠 Gab OS</div>
+    <div id="clock"></div>
+</div>
+
+<div class="desktop">
+
+<div class="icon" onclick="openWindow('files')">
+<span>📁</span>
+Fichiers
+</div>
+
+<div class="icon" onclick="openWindow('browser')">
+<span>🌐</span>
+Gab Browser
+</div>
+
+<div class="icon" onclick="openWindow('terminal')">
+<span>💻</span>
+Terminal
+</div>
+
+</div>
+
+<div class="window" id="files" style="top:80px;left:100px;">
+<div class="titlebar">📁 Fichiers</div>
+<div class="content">
+📁 Documents<br><br>
+📁 Téléchargements<br><br>
+📁 Images<br><br>
+📄 notes.txt<br><br>
+📄 projet_gabos.txt
+</div>
+</div>
+
+<div class="window" id="browser" style="top:120px;left:180px;">
+<div class="titlebar">🌐 Gab Browser</div>
+<div class="content">
+<h2>Bienvenue sur Gab Browser</h2>
+
+<input
+type="text"
+placeholder="Rechercher sur Internet..."
+style="width:90%;padding:8px;font-size:16px;"
+>
+
+<p>Version 1.0 de Gab Browser.</p>
+</div>
+</div>
+
+<div class="window" id="terminal" style="top:100px;left:220px;">
+<div class="titlebar">💻 Terminal</div>
+
+<div class="terminal">
+gab@gabos:~$ neofetch
+
+OS : Gab OS 1.0
+Machine : Gab Cube
+CPU : Cortex-A72
+RAM : 4 Go
+GPU : VideoCore VI
+
+gab@gabos:~$ echo Bonjour
+
+Bonjour
+
+gab@gabos:~$
+</div>
+</div>
+
+<div id="menu" class="menu">
+<div onclick="openWindow('files')">📁 Fichiers</div>
+<div onclick="openWindow('browser')">🌐 Gab Browser</div>
+<div onclick="openWindow('terminal')">💻 Terminal</div>
+</div>
+
+<div class="taskbar">
+<button class="start" onclick="toggleMenu()">
+💠 Gab Menu
+</button>
+</div>
+
+<script>
+function updateClock(){
+    document.getElementById("clock").textContent =
+        new Date().toLocaleTimeString("fr-FR");
+}
+
+setInterval(updateClock,1000);
+updateClock();
+
+function openWindow(id){
+    document.getElementById(id).style.display = "block";
+}
+
+function toggleMenu(){
+    const menu = document.getElementById("menu");
+
+    if(menu.style.display === "block"){
+        menu.style.display = "none";
+    }else{
+        menu.style.display = "block";
+    }
+}
+</script>
+
+</body>
+</html>
